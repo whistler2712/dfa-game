@@ -1,5 +1,0 @@
-{"timestamp":"44:05:30.840","source":"Server","level":"ERROR","message":"Error: ENOENT: no such file or directory, scandir '/Users/whistler2712/game_dev/dfa_game/dfa-game/src/app'"}
-{"timestamp":"44:05:30.842","source":"Server","level":"ERROR","message":"⨯ \"unhandledRejection:\" Error: ENOENT: no such file or directory, scandir '/Users/whistler2712/game_dev/dfa_game/dfa-game/src/app'"}
-{"timestamp":"44:05:30.843","source":"Server","level":"ERROR","message":"⨯ \"unhandledRejection: \" Error: ENOENT: no such file or directory, scandir '/Users/whistler2712/game_dev/dfa_game/dfa-game/src/app'"}
-{"timestamp":"44:05:30.884","source":"Server","level":"ERROR","message":"⨯ PageNotFoundError: Cannot find module for page: route not found /_not-found/page"}
-{"timestamp":"44:05:30.911","source":"Server","level":"ERROR","message":"⨯ PageNotFoundError: Cannot find module for page: route not found /_not-found/page"}
