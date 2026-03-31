@@ -23,8 +23,6 @@ function DevPanel() {
     level,
     clearedLevels,
     totalScore,
-    set,
-    nextLevel,
     loadLevel,
   } = useGameStore()
 
