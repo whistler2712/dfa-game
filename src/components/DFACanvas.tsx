@@ -229,7 +229,7 @@ function DFACanvasInner() {
   const modalTitle = editingEdge ? '통로 도형 수정' : '통로에 어떤 도형을 넣을까?'
 
   return (
-    <div className="w-full h-full relative">
+    <div className="w-full h-full relative pb-[60px] md:pb-0">
       <ReactFlow
         nodes={nodes}
         edges={edges}

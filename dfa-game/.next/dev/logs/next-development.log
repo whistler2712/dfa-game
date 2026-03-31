@@ -1,0 +1,6 @@
+{"timestamp":"59:23:44.280","source":"Server","level":"ERROR","message":"Error: ENOENT: no such file or directory, scandir '/Users/whistler2712/game_dev/dfa_game/dfa-game/src/app'"}
+{"timestamp":"59:23:44.289","source":"Server","level":"ERROR","message":"Error: ENOENT: no such file or directory, scandir '/Users/whistler2712/game_dev/dfa_game/dfa-game/src/app'"}
+{"timestamp":"59:24:30.055","source":"Server","level":"ERROR","message":"Error: ENOENT: no such file or directory, scandir '/Users/whistler2712/game_dev/dfa_game/dfa-game/src/app'"}
+{"timestamp":"59:24:30.057","source":"Server","level":"ERROR","message":"Error: ENOENT: no such file or directory, scandir '/Users/whistler2712/game_dev/dfa_game/dfa-game/src/app'"}
+{"timestamp":"59:24:31.284","source":"Server","level":"ERROR","message":"Error: ENOENT: no such file or directory, scandir '/Users/whistler2712/game_dev/dfa_game/dfa-game/src/app'"}
+{"timestamp":"59:24:31.287","source":"Server","level":"ERROR","message":"Error: ENOENT: no such file or directory, scandir '/Users/whistler2712/game_dev/dfa_game/dfa-game/src/app'"}

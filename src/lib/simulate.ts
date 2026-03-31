@@ -61,8 +61,10 @@ export interface ValidationError {
 
 export function validateDFA(
   dfa: PlayerDFA,
-  alphabet: Shape[]
+  alphabet: Shape[],
+  stateLabels?: Record<string, string>
 ): ValidationError[] {
+  const label = (id: string) => stateLabels?.[id] ?? id
   const errors: ValidationError[] = []
 
   if (dfa.states.length === 0) {
@@ -76,7 +78,7 @@ export function validateDFA(
     if (!dfa.states.includes(acc)) {
       errors.push({
         type: 'invalid_accepting',
-        message: `정답 방 "${acc}"이 존재하지 않아.`,
+        message: `정답 방 "${label(acc)}"이 존재하지 않아.`,
       })
     }
   }
@@ -85,7 +87,7 @@ export function validateDFA(
       if (dfa.transitions[state]?.[sym] === undefined) {
         errors.push({
           type: 'missing_transition',
-          message: `"${state}" 방에서 ${sym} 통로가 없어!`,
+          message: `"${label(state)}" 방에서 ${sym} 통로가 없어!`,
         })
       }
     }
@@ -99,6 +101,7 @@ export function validateDFA(
  */
 export interface RFNode {
   id: string
+  label?: string
   data: { isInitial?: boolean; isAccepting?: boolean }
 }
 

@@ -11,18 +11,22 @@ export default function SelfLoopEdge({
   sourceY,
   label,
 }: EdgeProps) {
-  const rx = 44
-  const ry = 54
+  // rx ≈ ry → 원형 루프, 적당한 크기
+  const rx = 38
+  const ry = 38
+  // 컨트롤포인트 배율 (1.6 x 1.4 → 원형에 가까운 쿠빅 베지어)
+  const cpx = rx * 1.6
+  const cpy = ry * 1.4
 
   const d = [
     `M ${sourceX} ${sourceY}`,
-    `C ${sourceX - rx} ${sourceY - ry * 2}`,
-    `  ${sourceX + rx} ${sourceY - ry * 2}`,
+    `C ${sourceX - cpx} ${sourceY - cpy}`,
+    `  ${sourceX + cpx} ${sourceY - cpy}`,
     `  ${sourceX} ${sourceY}`,
   ].join(' ')
 
-  // 끝점 접선 방향: cp2→endpoint = (-rx, 2ry)
-  const angle = Math.atan2(2 * ry, -rx)
+  // 끝점 접선 방향: cp2→endpoint = (-cpx, cpy)
+  const angle = Math.atan2(cpy, -cpx)
   const arrowLen = 7
   const arrowHalf = 3.5
 
@@ -35,8 +39,7 @@ export default function SelfLoopEdge({
 
   const labelStr = typeof label === 'string' ? label : ''
   const labelX = sourceX
-  // 루프 정점(sourceY - ry*2) 바깥 위쪽에 표시
-  const labelY = sourceY - ry * 2 - 16
+  const labelY = sourceY - cpy - 16
 
   return (
     <>

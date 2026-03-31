@@ -81,7 +81,7 @@ export function useTutorial(): TutorialState {
       case 'mission':         return true
       case 'add-node':        return nodes.length > 1
       case 'set-states':      return nodes.some(n => n.data?.isAccepting)
-      case 'add-edge':        return edges.some(e => e.source !== e.target)
+      case 'add-edge':        return edges.some(e => e.source !== e.target && !!e.label)
       case 'self-loop':       return edges.some(e => e.source === e.target)
       case 'check-solution':  return true
       default:                return true

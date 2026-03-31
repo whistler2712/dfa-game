@@ -29,7 +29,6 @@ export default function DFAEdge({
   sourceHandleId,
   targetHandleId,
 }: EdgeProps) {
-  // 핸들 방향 벡터 (없으면 source→target 방향으로 fallback)
   const rawDir = (): [number, number] => {
     const dx = targetX - sourceX, dy = targetY - sourceY
     const len = Math.hypot(dx, dy) || 1
@@ -46,26 +45,28 @@ export default function DFAEdge({
   const dist = Math.hypot(targetX - sourceX, targetY - sourceY)
   const len = Math.min(dist * 0.4, 120)
 
-  // cp1: source에서 핸들 방향으로 뻗음
-  let cp1x = sourceX + srcDir[0] * len
-  let cp1y = sourceY + srcDir[1] * len
-  // cp2: target에 핸들 방향으로 진입 (P3-P2 = tgtDir 방향)
-  let cp2x = targetX + tgtDir[0] * len
-  let cp2y = targetY + tgtDir[1] * len
-
-  // 양방향 엣지 오프셋 — 겹치지 않게 수직 방향으로 밀기
+  // 양방향 엣지 오프셋 — 시작점·끝점·컨트롤포인트 모두 수직 방향으로 밀어야 완전히 분리됨
   const bidirOffset: number = data?.bidirOffset ?? 0
+
+  let sx = sourceX, sy = sourceY
+  let tx = targetX, ty = targetY
+
   if (bidirOffset !== 0 && dist > 1) {
     const ex = targetX - sourceX, ey = targetY - sourceY
     const elen = Math.hypot(ex, ey)
-    const perpX = (-ey / elen) * 28 * bidirOffset
-    const perpY = ( ex / elen) * 28 * bidirOffset
-    cp1x += perpX; cp1y += perpY
-    cp2x += perpX; cp2y += perpY
+    const perpX = (-ey / elen) * 12 * bidirOffset
+    const perpY = ( ex / elen) * 12 * bidirOffset
+    sx += perpX; sy += perpY
+    tx += perpX; ty += perpY
   }
 
-  const path = `M ${sourceX} ${sourceY} C ${cp1x} ${cp1y} ${cp2x} ${cp2y} ${targetX} ${targetY}`
-  const [labelX, labelY] = bezierMid(sourceX, sourceY, cp1x, cp1y, cp2x, cp2y, targetX, targetY)
+  const cp1x = sx + srcDir[0] * len
+  const cp1y = sy + srcDir[1] * len
+  const cp2x = tx + tgtDir[0] * len
+  const cp2y = ty + tgtDir[1] * len
+
+  const path = `M ${sx} ${sy} C ${cp1x} ${cp1y} ${cp2x} ${cp2y} ${tx} ${ty}`
+  const [labelX, labelY] = bezierMid(sx, sy, cp1x, cp1y, cp2x, cp2y, tx, ty)
 
   const labelStr = typeof label === 'string' ? label : ''
 

@@ -210,6 +210,7 @@ export const useGameStore = create<GameState>()(
 
         const rfNodes = nodes.map((n) => ({
           id: n.id,
+          label: n.data.label,
           data: { isInitial: n.data.isInitial, isAccepting: n.data.isAccepting },
         }))
         const rfEdges = edges.map((e) => ({
@@ -218,7 +219,8 @@ export const useGameStore = create<GameState>()(
         }))
 
         const dfa = rfToDFA(rfNodes, rfEdges)
-        const valErrors = validateDFA(dfa, level.solution.alphabet)
+        const stateLabels = Object.fromEntries(rfNodes.map((n) => [n.id, n.label ?? n.id]))
+        const valErrors = validateDFA(dfa, level.solution.alphabet, stateLabels)
 
         if (valErrors.length > 0) {
           set({ validationErrors: valErrors, testResults: [], phase: 'failed' })
@@ -335,6 +337,7 @@ export const useGameStore = create<GameState>()(
         const { nodes, edges, level, testSequence } = get()
         const rfNodes = nodes.map((n) => ({
           id: n.id,
+          label: n.data.label,
           data: { isInitial: n.data.isInitial, isAccepting: n.data.isAccepting },
         }))
         const rfEdges = edges.map((e) => ({
@@ -342,7 +345,8 @@ export const useGameStore = create<GameState>()(
           label: typeof e.label === 'string' ? e.label : '',
         }))
         const dfa = rfToDFA(rfNodes, rfEdges)
-        const valErrors = validateDFA(dfa, level.solution.alphabet)
+        const stateLabels = Object.fromEntries(rfNodes.map((n) => [n.id, n.label ?? n.id]))
+        const valErrors = validateDFA(dfa, level.solution.alphabet, stateLabels)
         if (valErrors.length > 0) { set({ testSeqResult: 'invalid' }); return }
         set({ testSeqResult: simulateDFA(dfa, testSequence) })
       },

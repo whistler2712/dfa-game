@@ -1,6 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import DevTools from './DevTools'
+
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useGameStore } from '@/store/gameStore'
 import { WORLD_TITLES } from '@/lib/levels'
@@ -10,7 +12,11 @@ export default function HUD() {
   const { currentLevelIndex, level, lives, totalScore } = useGameStore()
   const router = useRouter()
   const [showExitConfirm, setShowExitConfirm] = useState(false)
-  const [soundEnabled, setSoundEnabled] = useState(() => soundManager.isEnabled())
+  // SSR hydration 불일치 방지: 초기값 고정 후 클라이언트에서 동기화
+  const [soundEnabled, setSoundEnabled] = useState(true)
+  useEffect(() => {
+    setSoundEnabled(soundManager.isEnabled())
+  }, [])
 
   function toggleSound() {
     soundManager.toggle()
@@ -105,6 +111,7 @@ export default function HUD() {
           </div>
         </div>
       )}
+      <DevTools />
     </>
   )
 }
