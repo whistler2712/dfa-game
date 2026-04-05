@@ -99,6 +99,19 @@ function DFACanvasInner() {
   // ── 새 연결 ──────────────────────────────────────────────
   const onConnect = useCallback((connection: Connection) => {
     const isSelfLoop = connection.source === connection.target
+
+    const sameEdge = edges.find(
+      e => e.source === connection.source && e.target === connection.target
+    )
+    if (sameEdge) {
+      setEditingEdge(sameEdge)
+      const current = typeof sameEdge.label === 'string'
+        ? (sameEdge.label.split(',').map(s => s.trim()).filter(Boolean) as Shape[])
+        : []
+      setEdgeLabel(current)
+      return
+    }
+
     let sh = connection.sourceHandle ?? 'h-e'
     let th = connection.targetHandle ?? 'h-w'
 
@@ -118,7 +131,7 @@ function DFACanvasInner() {
 
     setPendingEdge({ ...connection, sourceHandle: sh, targetHandle: th })
     setEdgeLabel([])
-  }, [nodes])
+  }, [nodes, edges])
 
   const confirmNewEdge = () => {
     if (!pendingEdge || edgeLabel.length === 0) { setPendingEdge(null); return }
