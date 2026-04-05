@@ -1,12 +1,11 @@
 'use client'
 
-import DevTools from './DevTools'
-
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useGameStore } from '@/store/gameStore'
 import { WORLD_TITLES } from '@/lib/levels'
 import { soundManager } from '@/lib/sounds'
+import DevTools from './DevTools'
 
 export default function HUD() {
   const { currentLevelIndex, level, lives, totalScore } = useGameStore()
@@ -36,7 +35,7 @@ export default function HUD() {
     <>
       <header className="w-full flex items-center justify-between px-4 py-2.5 bg-white/80 backdrop-blur border-b border-stone-200 shrink-0">
         {/* 왼쪽: 나가기 + 스테이지 */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 whitespace-nowrap">
           <button
             onClick={() => setShowExitConfirm(true)}
             className="font-['Nunito'] text-xs text-stone-400 hover:text-stone-600 transition-colors px-2 py-1 rounded-lg hover:bg-stone-100"
@@ -49,16 +48,14 @@ export default function HUD() {
             <span className="font-bold text-stone-700">{stageNum}</span>
             {' '}/ {totalStages}
           </span>
-          <span
-            className="font-['Nunito'] text-xs px-2 py-0.5 rounded-full bg-stone-100 text-stone-500 hidden sm:inline"
-          >
+          <span className="font-['Nunito'] text-xs px-2 py-0.5 rounded-full bg-stone-100 text-stone-500 hidden sm:inline">
             {worldTitle}
           </span>
         </div>
 
         {/* 오른쪽: 점수 + 목숨 + 사운드 */}
-        <div className="flex items-center gap-4">
-          <div className="font-['Nunito'] text-sm text-stone-600">
+        <div className="flex items-center gap-3">
+          <div className="hidden sm:block font-['Nunito'] text-sm text-stone-600">
             <span className="text-xs text-stone-400 mr-1">점수</span>
             <span className="font-bold text-stone-800">{totalScore.toLocaleString()}</span>
           </div>
@@ -111,6 +108,7 @@ export default function HUD() {
           </div>
         </div>
       )}
+
       <DevTools />
     </>
   )

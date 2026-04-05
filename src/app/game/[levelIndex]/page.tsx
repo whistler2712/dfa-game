@@ -39,8 +39,8 @@ export default function LevelPage() {
       <HUD />
 
       <div className="flex flex-1 min-h-0">
-        {/* 왼쪽 사이드바: MissionCard가 내부에서 스크롤·버튼 고정 처리 */}
-        <aside className="w-72 shrink-0 flex flex-col border-r border-stone-200 bg-white/60 backdrop-blur overflow-hidden">
+        {/* 왼쪽 사이드바: MissionCard가 내부에서 스크롤·버튼 고정 처리 (모바일에서 숨김) */}
+        <aside className="hidden md:flex w-72 shrink-0 flex-col border-r border-stone-200 bg-white/60 backdrop-blur overflow-hidden">
           <div className="flex-1 min-h-0 flex flex-col">
             <MissionCard />
           </div>
