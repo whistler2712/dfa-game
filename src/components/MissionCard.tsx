@@ -160,8 +160,13 @@ export default function MissionCard() {
   return (
     <>
       {/* ── 데스크탑: 사이드 패널 (md 이상) ─────────────────── */}
-      <div className="hidden md:flex flex-col h-full">
-        {panelContent}
+      <div className="hidden md:flex w-72 shrink-0 flex-col border-r border-stone-200 bg-white/60 backdrop-blur overflow-hidden h-full">
+        <div className="flex-1 min-h-0 flex flex-col">
+          {panelContent}
+        </div>
+        <div className="border-t border-stone-100 px-4 py-3 shrink-0">
+          <ShapePad />
+        </div>
       </div>
 
       {/* ── 모바일: 하단 플로팅 바 + 시트 (md 미만) ────────── */}

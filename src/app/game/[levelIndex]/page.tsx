@@ -7,7 +7,6 @@ import { useGameStore } from '@/store/gameStore'
 import { LEVELS } from '@/lib/levels'
 import HUD from '@/components/HUD'
 import MissionCard from '@/components/MissionCard'
-import ShapePad from '@/components/ShapePad'
 import ClearModal from '@/components/ClearModal'
 import GameOverModal from '@/components/GameOverModal'
 import TutorialOverlay from '@/components/TutorialOverlay'
@@ -39,15 +38,8 @@ export default function LevelPage() {
       <HUD />
 
       <div className="flex flex-1 min-h-0">
-        {/* 왼쪽 사이드바: MissionCard가 내부에서 스크롤·버튼 고정 처리 (모바일에서 숨김) */}
-        <aside className="hidden md:flex w-72 shrink-0 flex-col border-r border-stone-200 bg-white/60 backdrop-blur overflow-hidden">
-          <div className="flex-1 min-h-0 flex flex-col">
-            <MissionCard />
-          </div>
-          <div className="border-t border-stone-100 px-4 py-3 shrink-0">
-            <ShapePad />
-          </div>
-        </aside>
+        {/* MissionCard가 데스크탑/모바일 레이아웃을 자체 처리 */}
+        <MissionCard />
 
         {/* 캔버스 */}
         <main className="flex-1 min-w-0 relative">
